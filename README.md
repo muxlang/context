@@ -36,6 +36,12 @@ These are the source of truth other READMEs copy from.
 - **Install:** `curl -fsSL https://raw.githubusercontent.com/muxlang/mux-compiler/main/scripts/install.sh | sh`
 - **License:** MIT.
 
+## Filing issues
+
+Not sure which repo a bug or idea belongs to? **Open it in this repo** - issues
+filed here are triaged and moved to the right repo. If an issue is clearly scoped
+to one repo (e.g. a compiler crash, a website typo), file it there directly.
+
 ## Repositories
 
 | Repo | What it is |
