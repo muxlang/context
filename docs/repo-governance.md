@@ -77,32 +77,39 @@ not on individual repos, so one project already gives cross-repo field
 consistency. Priority is carried on issues by the `priority: *` labels (so it
 round-trips to Linear); the project `Status` field tracks workflow state.
 
-## Linear integration
+## Project board (GitHub)
 
-Goal: manage issues on GitHub or Linear interchangeably, with **GitHub as the
-source of truth** and two-way sync keeping both in step. The label taxonomy above
-is designed so names match on both sides and round-trip without translation.
+The org project [Mux Project Tasks](https://github.com/orgs/muxlang/projects/2)
+aggregates issues across all repos in one board for cross-repo visibility and
+prioritization.
 
-### One-time setup (manual, in the Linear UI)
+### Board structure
 
-These steps cannot be automated from the repos - they require Linear workspace
-admin access:
+- **Status** field (workflow state, mixing priority levels and workflow for now):
+  High Priority, Medium Priority, Low Priority, Future Work, In Progress, Done.
+  Over time, new issues should use the **Priority** field separately (below).
+- **Priority** field (new, Urgent / High / Medium / Low): Use this for issue
+  priority instead of embedding it in Status. Separating priority from workflow
+  makes sorting and filtering clearer.
+- **Labels** field: Shows the canonical label set (documentation, chore, refactor,
+  testing, etc.).
+- **Repository** field: Filter by repo.
+- **Milestone** field: Links to release milestones in each repo.
 
-1. **Connect GitHub:** Linear -> Settings -> Integrations -> GitHub -> authorize
-   the `muxlang` organization.
-2. **Enable GitHub Issue Sync** for each repo, mapping it to the appropriate
-   Linear team, with GitHub set as the primary/source system.
-3. **Enable PR linking** so branches and PRs using magic words (e.g.
-   `Fixes MUX-123`) attach to their Linear issue.
+### Workflow
 
-### Mapping (configure in Linear to match this table)
+1. Create issues in the repo you're working on (auto-added to the project).
+2. Triage: set Priority (Urgent/High/Medium/Low) and Status (Backlog/In
+   Progress/Done).
+3. Filter by Repository, Priority, Status, Labels to find work to do or see
+   cross-repo impact.
 
-| GitHub | Linear |
-| --- | --- |
-| Issue type `Bug` / `Feature` / `Task` | Linear issue label or type of the same name |
-| `priority: urgent` / `high` / `medium` / `low` | Priority Urgent / High / Medium / Low |
-| Open issue (untriaged) + `needs triage` | Backlog / Triage |
-| Open issue | Todo |
-| `blocked` | Blocked |
-| Closed issue | Done / Canceled |
-| Any other label | Linear label of the same name (created once, then round-trips) |
+### Tips
+
+- Filter by Repository to see one repo's work, or by Priority to see what's
+  urgent org-wide.
+- Status currently mixes priority with workflow; future issues should use the
+  Priority field instead.
+- Milestones show per-repo release planning; see
+  [independent versioning](decisions/0002-independent-versioning.md).
+
